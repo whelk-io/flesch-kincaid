@@ -3,4 +3,4 @@ OSS library for calculating reading level of text using Flesch-Kincaid readabili
 
 Wikipedia: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests
 
-[![CodeFactor](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid/badge)](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid) ![](https://github.com/whelk-io/flesch-kincaid/workflows/deploy/badge.svg)
+[![CodeFactor](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid/badge)](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid) ![](https://github.com/whelk-io/flesch-kincaid/workflows/deploy/badge.svg) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=whelk-io/flesch-kincaid)](https://dependabot.com)
