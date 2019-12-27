@@ -37,5 +37,13 @@
 		</dependency>
 
 	</dependencies>
-
+	
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>whelk-io</name>
+			<url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
+		</repository>
+	</distributionManagement>
+ 
 </project>
