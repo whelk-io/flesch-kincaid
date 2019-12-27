@@ -45,6 +45,5 @@
 			<url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
 		</repository>
 	</distributionManagement>
-
-
+ 
 </project>
