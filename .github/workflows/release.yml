@@ -36,8 +36,8 @@ jobs:
         && echo $minor_version \
         && patch_version=`echo $old_version | awk -F'-' '{print $1}' | awk -F'.' '{print $3}'` \
         && echo $patch_version \
-        && new_patch_version=$patch_version + 1 \
-        && echo $new_patch_version
+        && let "patch_version+=1" \
+        && echo $patch_version
         
 
 
