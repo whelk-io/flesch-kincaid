@@ -23,15 +23,11 @@ jobs:
     - name: Parse Version from POM
       shell: bash
       run: | 
-        cat pom.xml | grep version -m 1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}' > /tmp/version.txt
+        echo `cat pom.xml | grep version -m 1`
     - name: print version
       shell: bash
       run: printf "::set-output name=id::%s" $(cat /tmp/version.txt)
-    - uses: s4u/maven-settings-action@v1
-      with:
-        servers: '[{"id": "github", "username": "${{ secrets.PACKAGE_KEY }}", "password": "${{ secrets.PACKAGE_TOKEN }}"}]'  
-    - name: Build with Maven
-      run: mvn -B deploy --file pom.xml
+
 
 
 
