@@ -11,18 +11,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+      
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+
     - name: Parse Version from POM
       shell: bash
       run: | 
         cat pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}' > /tmp/version.txt
+        
     - name: Print version
       shell: bash
       run: |
         version=`cat /tmp/version.txt` && echo Deploying $version
+
     - name: Release package
       run: |
         version=`cat /tmp/version.txt` &&
@@ -32,13 +36,29 @@ jobs:
           -H 'Content-Type: application/json' \
           -H 'Host: api.github.com' \
           -d '{ "tag_name": "'$version'", "target_commitish": "master", "name": "'$version'", "body": "Release deployment", "draft": false, "prerelease": false }'
+
     - name: Create Maven settings.xml
       uses: s4u/maven-settings-action@v1
       with:
         servers: '[{"id": "github", "username": "${{ secrets.PACKAGE_KEY }}", "password": "${{ secrets.PACKAGE_TOKEN }}"}]'  
+
     - name: Deploy package
       run: mvn -B deploy --file pom.xml
-
-
-
+    
+    - name: Checkout develop branch
+      uses: actions/checkout@master
+      with:
+        branch: develop
+      
+    - name: Merge master to develop
+      run: |
+        git config --local user.email ${{ secrets.BUILD_EMAIL }}
+        git config --local user.name ${{ secrets.BUILD_USERNAME }}
+        git pull
+        git merge origin/master
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: develop
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
