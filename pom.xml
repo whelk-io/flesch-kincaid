@@ -23,7 +23,7 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/whelk-io/flesch-kincaid</url>
+		<url>https://github.com/whelk-io/flesch-kincaid.git</url>
 	</scm>
 
 	<properties>
