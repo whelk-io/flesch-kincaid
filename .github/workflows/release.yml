@@ -42,10 +42,14 @@ jobs:
         && mvn -B versions:set -DnewVersion=$new_version --file pom.xml \
         && echo pom.xml
         
-    - name: Commit version update
+    - name: Commit files
       run: |
-        git config --global user.email ${{ secrets.BUILD_EMAIL }} \
-        && git config --global user.name ${{ secrets.BUILD_USERNAME }} \
-        && git commit -am "Update release version" \
-        && git push origin HEAD:develop
+        git config --local user.email ${{ secrets.BUILD_EMAIL }}
+        git config --local user.name ${{ secrets.BUILD_USERNAME }}
+        git commit -m "Update version in pom.xml" -a
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
           
