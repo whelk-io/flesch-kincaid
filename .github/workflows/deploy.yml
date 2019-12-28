@@ -15,10 +15,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Maven release
-      uses: qcastel/github-actions-maven-release@v1.0.3
+    - uses: s4u/maven-settings-action@v1
       with:
-        release-branch-name: "master"
-        git-release-bot-name: "whelk.bot"
-        git-release-bot-email: "whelk.bot@gmail.com"
-        access-token: ${{ secrets.PACKAGE_TOKEN }}
+        servers: '[{"id": "github", "username": ${{ secrets.PACKAGE_KEY }}, "password": ${{ secrets.PACKAGE_TOKEN }}}]'  
+    - name: Build with Maven
+      run: mvn -B deploy --file pom.xml
+
+
+
