@@ -28,19 +28,14 @@ jobs:
     - name: Increment version in pom.xml
       run: |
         old_version=`cat /tmp/release.json | grep tag_name -m 1 | awk '{$1=$1};1' | awk -F':' '{print $2}' | awk -F'"' '{print $2}'` \
-        && echo $old_version \
+        && echo "Old version: " $old_version \
         && major_version=`echo $old_version | awk -F'-' '{print $1}' | awk -F'.' '{print $1}'` \
-        && echo $major_version \
         && minor_version=`echo $old_version | awk -F'-' '{print $1}' | awk -F'.' '{print $2}'` \
-        && echo $minor_version \
         && patch_version=`echo $old_version | awk -F'-' '{print $1}' | awk -F'.' '{print $3}'` \
-        && echo $patch_version \
         && let "patch_version+=1" \
-        && echo $patch_version \
         && new_version=$major_version"."$minor_version"."$patch_version"-RELEASE" \
-        && echo $new_version \
-        && mvn -B versions:set -DnewVersion=$new_version --file pom.xml \
-        && echo pom.xml
+        && echo "New version: " $new_version \
+        && mvn -B versions:set -DnewVersion=$new_version --file pom.xml
         
     - name: Commit files
       run: |
