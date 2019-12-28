@@ -18,7 +18,7 @@ jobs:
     - name: Parse Version from POM
       shell: bash
       run: | 
-        version=`pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}'`
+        version=`cat pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}'`
     - name: print version
       shell: bash
       run: |
