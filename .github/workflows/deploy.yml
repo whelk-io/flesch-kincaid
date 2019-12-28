@@ -3,7 +3,7 @@ name: deploy
 on:
   push:
     branches: master
-  
+
 jobs:
   build:
 
@@ -19,7 +19,7 @@ jobs:
 
     - name: Parse Version from POM
       shell: bash
-      run: | 
+      run: |
         cat pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}' > /tmp/version.txt
 
     - name: Print version
@@ -40,7 +40,7 @@ jobs:
     - name: Create Maven settings.xml
       uses: s4u/maven-settings-action@v1
       with:
-        servers: '[{"id": "github", "username": "${{ secrets.PACKAGE_KEY }}", "password": "${{ secrets.PACKAGE_TOKEN }}"}]'  
+        servers: '[{"id": "github", "username": "${{ secrets.PACKAGE_KEY }}", "password": "${{ secrets.PACKAGE_TOKEN }}"}]'
 
     - name: Deploy package
       run: mvn -B deploy --file pom.xml
