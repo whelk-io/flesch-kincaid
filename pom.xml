@@ -54,5 +54,13 @@
 		</dependency>
 
 	</dependencies>
+	
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
+		</repository>
+	</distributionManagement>
 
 </project>

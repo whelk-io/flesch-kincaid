@@ -31,7 +31,7 @@ source: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch_
       "A rich man's wife became sick, and when she felt that her end was drawing near, " +
       "she called her only daughter to her bedside and said, \"Dear child, remain pious " +
       "and good, and then our dear God will always protect you, and I will look down on " +
-      " you from heaven and be near you.\" With this she closed her eyes and died. " +
+      "you from heaven and be near you.\" With this she closed her eyes and died. " +
       "The girl went out to her mother's grave every day and wept, and she remained pious " +
       "and good. When winter came the snow spread a white cloth over the grave, and when " +
       "the spring sun had removed it again, the man took himself another wife. This wife " +
@@ -64,7 +64,7 @@ source: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch�
       "A rich man's wife became sick, and when she felt that her end was drawing near, " +
       "she called her only daughter to her bedside and said, \"Dear child, remain pious " +
       "and good, and then our dear God will always protect you, and I will look down on " +
-      " you from heaven and be near you.\" With this she closed her eyes and died. " +
+      "you from heaven and be near you.\" With this she closed her eyes and died. " +
       "The girl went out to her mother's grave every day and wept, and she remained pious " +
       "and good. When winter came the snow spread a white cloth over the grave, and when " +
       "the spring sun had removed it again, the man took himself another wife. This wife " +
