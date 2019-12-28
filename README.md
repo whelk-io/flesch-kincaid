@@ -81,9 +81,21 @@ source: https://en.wikipedia.org/wiki/Fleschâ€“Kincaid_readability_tests#Fleschâ
 ## Maven Integration
 
 ````xml
-<dependency>
-	<groupId>io.whelk.flesch.kincaid</groupId>
-	<artifactId>whelk-flesch-kincaid</artifactId>
-	<version>0.0.1-RELEASE</version>
-</dependency>
+<dependencies>
+	<dependency>
+		<groupId>io.whelk.flesch.kincaid</groupId>
+		<artifactId>whelk-flesch-kincaid</artifactId>
+		<version>0.0.6-release</version>
+	</dependency>
+
+</dependencies>
+
+<repositories>
+	<repository>
+		<id>github</id>
+		<url>https://maven.pkg.github.com/whelk-io/flesh-kincaid</url>
+	</repository>
+</repositories>
 ````
+
+More information on authenticating with GitHub packages: https://help.github.com/en/github/managing-packages-with-github-packages/configuring-apache-maven-for-use-with-github-packages#authenticating-to-github-packages
