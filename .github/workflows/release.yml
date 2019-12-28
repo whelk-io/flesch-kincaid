@@ -31,3 +31,4 @@ jobs:
     - name: Update version
       run: mvn -B release:update-versions --batch-mode --file pom.xml
 
+
