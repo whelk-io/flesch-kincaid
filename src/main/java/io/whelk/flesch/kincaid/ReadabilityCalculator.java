@@ -29,7 +29,7 @@ public class ReadabilityCalculator {
    * Scores can be interpreted as shown in the table below.
    * 
    * <br><br>
-   * <table>
+   * <table summary="score and school level mapping">
    *    <tr>
    *        <td><b>Score</b></td>
    *        <td><b>School Level</b></td>
@@ -48,7 +48,7 @@ public class ReadabilityCalculator {
    *        <td>Fairly easy to read.</td>
    *    </tr><tr>
    *        <td>70.0-60.0</td>
-   *        <td>8th & 9th grade</td>
+   *        <td>8th &amp; 9th grade</td>
    *        <td>Plain English. Easily understood by 13- to 15-year-old students.</td>
    *    </tr><tr>
    *        <td>60.0-50.0</td>
