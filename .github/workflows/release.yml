@@ -28,7 +28,8 @@ jobs:
         
     - name: temp
       run: |
-        cat /tmp/release.json | grep tag_name -m 1 | awk '{$1=$1};1' | awk -F':' '{print $2}' | awk -F'"' '{print $2}'
+        old_version=`cat /tmp/release.json | grep tag_name -m 1 | awk '{$1=$1};1' | awk -F':' '{print $2}' | awk -F'"' '{print $2}'` \
+        && cat $old_version
         
 
 
