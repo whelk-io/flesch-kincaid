@@ -15,19 +15,41 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-
+        
+    - name: Run tests
+      run: mvn -B test --file pom.xml
+      
     - name: Get latest release version
       run: |
         curl -X GET \
           https://api.github.com/repos/whelk-io/flesch-kincaid/releases/latest \
           -o /tmp/release.json
-           
-    - name: temp
+                   
+    - name: Increment version in pom.xml
       run: |
-        cat /tmp/release.json
+        old_version=`cat /tmp/release.json | grep tag_name -m 1 | awk '{$1=$1};1' | awk -F':' '{print $2}' | awk -F'"' '{print $2}'` \
+        && echo $old_version \
+        && major_version=`echo $old_version | awk -F'-' '{print $1}' | awk -F'.' '{print $1}'` \
+        && echo $major_version \
+        && minor_version=`echo $old_version | awk -F'-' '{print $1}' | awk -F'.' '{print $2}'` \
+        && echo $minor_version \
+        && patch_version=`echo $old_version | awk -F'-' '{print $1}' | awk -F'.' '{print $3}'` \
+        && echo $patch_version \
+        && let "patch_version+=1" \
+        && echo $patch_version \
+        && new_version=$major_version"."$minor_version"."$patch_version"-RELEASE" \
+        && echo $new_version \
+        && mvn -B versions:set -DnewVersion=$new_version --file pom.xml \
+        && echo pom.xml
         
-    - name: Build with Maven
-      run: mvn -B test --file pom.xml
-    - name: Update version
-      run: mvn -B release:update-versions --batch-mode --file pom.xml
-
+    - name: Commit files
+      run: |
+        git config --local user.email ${{ secrets.BUILD_EMAIL }}
+        git config --local user.name ${{ secrets.BUILD_USERNAME }}
+        git commit -m "Update version in pom.xml" -a
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+          
