@@ -23,9 +23,19 @@ jobs:
       shell: bash
       run: |
         cat /tmp/version.txt
+    - name: Release package
+      run: |
+        curl -X POST \
+          https://api.github.com/repos/whelk-io/flesch-kincaid/releases \
+          -H 'Authorization: Bearer ${{API_KEY}}' \
+          -H 'Content-Type: application/json' \
+          -H 'Host: api.github.com' \
+          -d '{ "tag_name": "0.0.2-RELEASE", "target_commitish": "master", "name": "0.0.2-RELEASE", "body": "Release deployment", "draft": false, "prerelease": false }' \
+          -o /tmp/output.json
     - name: print version 3
       shell: bash
-      run: printf "::set-output name=id::%s" $(cat /tmp/version.txt)
+      run: |
+        cat /tmp/output.json
 
 
 
