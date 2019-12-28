@@ -18,11 +18,15 @@ jobs:
     - name: Parse Version from POM
       shell: bash
       run: | 
-        set version=`cat pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}'`
+        cat pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}' > /tmp/version.txt
     - name: print version
       shell: bash
       run: |
-        echo $version
+        cat /tmp/version.txt
+    - name: print version2
+      shell: bash
+      run: |
+        set version=`cat /tmp/version.txt` && echo $version
     - name: Release package
       run: |
         curl -X POST \
