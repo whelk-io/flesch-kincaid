@@ -18,16 +18,16 @@ jobs:
     - name: Parse Version from POM
       shell: bash
       run: | 
-        cat pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}' > /tmp/version.txt
+        set version=`cat pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}'`
     - name: print version
       shell: bash
       run: |
-        cat /tmp/version.txt
+        echo $version
     - name: Release package
       run: |
         curl -X POST \
           https://api.github.com/repos/whelk-io/flesch-kincaid/releases \
-          -H 'Authorization: Bearer ${{API_KEY}}' \
+          -H 'Authorization: Bearer ${{ secrets.API_KEY }}' \
           -H 'Content-Type: application/json' \
           -H 'Host: api.github.com' \
           -d '{ "tag_name": "0.0.2-RELEASE", "target_commitish": "master", "name": "0.0.2-RELEASE", "body": "Release deployment", "draft": false, "prerelease": false }' \
