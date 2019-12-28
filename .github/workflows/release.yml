@@ -24,7 +24,7 @@ jobs:
            
     - name: temp
       run: |
-        cat /tmp/release.json
+        echo `cat /tmp/release.json | grep version -m 1 | awk '{$1=$1};1'`
         
     - name: Build with Maven
       run: mvn -B test --file pom.xml
