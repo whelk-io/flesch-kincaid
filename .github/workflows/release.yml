@@ -38,7 +38,7 @@ jobs:
         && echo $patch_version \
         && let "patch_version+=1" \
         && echo $patch_version \ 
-        && new_version=$major_version.$minor_version.$patch.version-RELEASE \
+        && new_version=$major_version.$minor_version.$patch_version-RELEASE \
         && echo $new_version
         
 
