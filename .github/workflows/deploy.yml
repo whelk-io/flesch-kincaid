@@ -26,7 +26,7 @@ jobs:
     - name: print version2
       shell: bash
       run: |
-        set version=`cat /tmp/version.txt` && echo $version
+        version=`cat /tmp/version.txt` && echo $version
     - name: Release package
       run: |
         curl -X POST \
