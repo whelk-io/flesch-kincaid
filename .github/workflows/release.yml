@@ -43,6 +43,3 @@ jobs:
         && mvn -B versions:set -DnewVersion=$new_version --file pom.xml \
         && echo pom.xml
         
-
-
-
