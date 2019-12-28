@@ -29,12 +29,13 @@ jobs:
         version=`cat /tmp/version.txt` && echo $version
     - name: Release package
       run: |
+        version=`cat /tmp/version.txt` &&
         curl -X POST \
           https://api.github.com/repos/whelk-io/flesch-kincaid/releases \
           -H 'Authorization: Bearer ${{ secrets.API_KEY }}' \
           -H 'Content-Type: application/json' \
           -H 'Host: api.github.com' \
-          -d '{ "tag_name": "0.0.2-RELEASE", "target_commitish": "master", "name": "0.0.2-RELEASE", "body": "Release deployment", "draft": false, "prerelease": false }' \
+          -d '{ "tag_name": "$version", "target_commitish": "master", "name": "$version", "body": "Release deployment", "draft": false, "prerelease": false }' \
           -o /tmp/output.json
     - name: print version 3
       shell: bash
