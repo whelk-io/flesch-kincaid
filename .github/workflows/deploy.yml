@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - shell:
-        bash
-      name: "meh"
-      run: |
-        echo "hello world"
     - uses: actions/checkout@v1
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
@@ -23,7 +18,7 @@ jobs:
     - name: Parse Version from POM
       shell: bash
       run: | 
-        cat pom.xml | grep version -m 2 | tail -1 
+        cat pom.xml | grep version -m 2 | tail -1 | awk '{$1=$1};1'
     - name: print version
       shell: bash
       run: printf "::set-output name=id::%s" $(cat /tmp/version.txt)
