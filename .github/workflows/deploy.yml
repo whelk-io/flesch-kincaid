@@ -16,4 +16,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B deploy -Dregistry=https://maven.pkg.github.com/whelk-io -Dtoken=${{ secrets.GITHUB_TOKEN }} --file pom.xml
+      run: mvn -B deploy -Dregistry=https://maven.pkg.github.com/whelk-io -Dtoken=${{ secrets.GBG_KEY }} --file pom.xml
