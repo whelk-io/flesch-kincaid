@@ -37,7 +37,9 @@ jobs:
         && patch_version=`echo $old_version | awk -F'-' '{print $1}' | awk -F'.' '{print $3}'` \
         && echo $patch_version \
         && let "patch_version+=1" \
-        && echo $patch_version
+        && echo $patch_version \ 
+        && new_version=$major_version.$minor_version.$patch.version-RELEASE \
+        && echo $new_version
         
 
 
