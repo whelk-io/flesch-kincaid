@@ -35,7 +35,7 @@ jobs:
           -H 'Authorization: Bearer ${{ secrets.API_KEY }}' \
           -H 'Content-Type: application/json' \
           -H 'Host: api.github.com' \
-          -d '{ "tag_name": "$version", "target_commitish": "master", "name": "$version", "body": "Release deployment", "draft": false, "prerelease": false }' \
+          -d '{ "tag_name": "'$version'", "target_commitish": "master", "name": "'$version'", "body": "Release deployment", "draft": false, "prerelease": false }' \
           -o /tmp/output.json
     - name: print version 3
       shell: bash
