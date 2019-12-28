@@ -8,7 +8,7 @@
 
 	<groupId>io.whelk.flesch.kincaid</groupId>
 	<artifactId>whelk-flesch-kincaid</artifactId>
-	<version>0.0.1-RELEASE</version>
+	<version>0.0.2-RELEASE</version>
 
 	<name>Flesch Kincaid</name>
 	<description>Java OSS library for performing Flesch-Kincaid readability tests.</description>
