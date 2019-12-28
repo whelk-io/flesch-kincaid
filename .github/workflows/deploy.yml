@@ -15,6 +15,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - run: version=`cat pom.xml | grep version -m 1 | awk '{$1=$1};1' | awk -F'>' '{print $2}' | awk -F'<' '{print $1}'`
+    - run: echo $version
     - uses: s4u/maven-settings-action@v1
       with:
         servers: '[{"id": "github", "username": "${{ secrets.PACKAGE_KEY }}", "password": "${{ secrets.PACKAGE_TOKEN }}"}]'  
