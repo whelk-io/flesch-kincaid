@@ -49,7 +49,7 @@ jobs:
         git commit -m "Update version in pom.xml" -a
         
     - name: Push changes
-      uses: ad-m/github-push-action@master
+      uses: ad-m/github-push-action@develop
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
           
