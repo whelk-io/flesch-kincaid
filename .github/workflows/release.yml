@@ -39,6 +39,7 @@ jobs:
 
     - name: Commit files
       run: |
+        git pull
         git config --local user.email ${{ secrets.BUILD_EMAIL }}
         git config --local user.name ${{ secrets.BUILD_USERNAME }}
         git commit -m "Update version in pom.xml" -a > /tmp/ignore.txt
