@@ -41,8 +41,7 @@ jobs:
       run: |
         git config --local user.email ${{ secrets.BUILD_EMAIL }}
         git config --local user.name ${{ secrets.BUILD_USERNAME }}
-        git commit -m "Update version in pom.xml" -a > /tmp/ignore.txt
-        cat /tmp/ignore.txt
+        git commit -m "Update version in pom.xml" -a 2>/dev/null
 
     - name: Push changes
       uses: ad-m/github-push-action@master
