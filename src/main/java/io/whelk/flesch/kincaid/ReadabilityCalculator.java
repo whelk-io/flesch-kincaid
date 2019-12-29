@@ -1,5 +1,6 @@
 package io.whelk.flesch.kincaid;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import edu.stanford.nlp.simple.Document;
@@ -16,6 +17,8 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class ReadabilityCalculator {
+  
+  static final char[] VOWELS = {'a', 'e', 'i', 'o', 'u', 'y'};
 
   /**
    * In the Flesch reading-ease test, higher scores indicate material that is easier to read; lower
@@ -74,7 +77,7 @@ public class ReadabilityCalculator {
     
     double totalSentences = sentences.size();
     double totalWords = words.size();
-    double totalSyllables = getSyllablesCount(words);
+    double totalSyllables = countSyllables(words);
     
     return 206.835 - 1.015 * (totalWords / totalSentences) - 84.6 * (totalSyllables / totalWords);
   }
@@ -115,66 +118,68 @@ public class ReadabilityCalculator {
     
     double totalSentences = sentences.size();
     double totalWords = words.size();
-    double totalSyllables = getSyllablesCount(words);
+    double totalSyllables = countSyllables(words);
     
     return 0.39 * (totalWords / totalSentences) + 11.8 * (totalSyllables / totalWords) - 15.59;
   }
   
-  private static List<Sentence> tokenize(String content) {
-    return new Document(content).sentences();
+  static List<Sentence> tokenize(String content) {
+    return content != null ? new Document(content).sentences() : Collections.emptyList();
   }
   
-  private static List<Token> tokenize(List<Sentence> sentences) { 
-    return sentences
-            .stream()
-            .map(Sentence::tokens)
-            .flatMap(List<Token>::stream)
-            .filter(ReadabilityCalculator::isWord)
-            .collect(Collectors.toList());
+  static List<Token> tokenize(List<Sentence> sentences) { 
+    return sentences != null ? 
+           sentences
+              .stream()
+              .map(Sentence::tokens)
+              .flatMap(List<Token>::stream)
+              .filter(ReadabilityCalculator::isWord)
+              .collect(Collectors.toList()) : 
+           Collections.emptyList();
   }
 
-  private static boolean isWord(Token token) { 
-    return POSTag.parse(token.posTag()) != POSTag.UNKNOWN;
+  static boolean isWord(Token token) { 
+    return token != null && POSTag.parse(token.posTag()) != POSTag.UNKNOWN;
   }
   
-  private static double getSyllablesCount(List<Token> tokens) {
+  static double countSyllables(List<Token> tokens) {
     return tokens
             .stream()
             .map(Token::originalText)
-            .mapToDouble(ReadabilityCalculator::getSyllablesCount)
+            .mapToDouble(ReadabilityCalculator::countSyllables)
             .sum();
   }
   
-  private static double getSyllablesCount(String word) {
-    char[] vowels = {'a', 'e', 'i', 'o', 'u', 'y'};
-    String currentWord = word;
+  static double countSyllables(String word) {
+    if (word == null)
+      return 0;
+    
     int numVowels = 0;
     boolean lastWasVowel = false;
-    for (char wc : currentWord.toCharArray()) {
+    for (char wordChar : word.toCharArray()) {
       boolean foundVowel = false;
-      for (char v : vowels) {
-        // don't count diphthongs
-        if (v == wc && lastWasVowel) {
+      for (char vowel : VOWELS) {
+        if (vowel == wordChar && lastWasVowel) {
           foundVowel = true;
           lastWasVowel = true;
           break;
-        } else if (v == wc && !lastWasVowel) {
+        } else if (vowel == wordChar && !lastWasVowel) {
           numVowels++;
           foundVowel = true;
           lastWasVowel = true;
           break;
         }
       }
-
-      // if full cycle and no vowel found, set lastWasVowel to false;
       if (!foundVowel)
         lastWasVowel = false;
     }
-    // remove es, it's _usually? silent
-    if (currentWord.length() > 2 && currentWord.substring(currentWord.length() - 2) == "es")
+    
+    // remove silent es
+    if (word.length() > 2 && "es".equals(word.substring(word.length() - 2)))
       numVowels--;
+    
     // remove silent e
-    else if (currentWord.length() > 1 && currentWord.substring(currentWord.length() - 1) == "e")
+    else if (word.length() > 1 && "e".equals(word.substring(word.length() - 1)))
       numVowels--;
 
     return numVowels;

@@ -40,7 +40,7 @@ source: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch_
 
       double result = ReadabilityCalculator.calculateReadingEase(content);
 
-      System.out.println(result);  // 77.73467625899282
+      System.out.println(result);  // 93.55913669064749
 
   }
 ````
@@ -73,7 +73,7 @@ source: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch�
 
       double result = ReadabilityCalculator.calculateGradeLevel(content);
 
-      System.out.println(result);  // 7.349969167523124
+      System.out.println(result);  // 5.142774922918807
 
   }
 ````

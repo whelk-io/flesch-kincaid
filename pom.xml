@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.whelk.flesch.kincaid</groupId>
 	<artifactId>whelk-flesch-kincaid</artifactId>
-	<version>0.0.12-RELEASE</version>
+	<version>0.0.13-RELEASE</version>
 	<name>Flesch Kincaid</name>
 	<description>Java OSS library for performing Flesch-Kincaid readability tests.</description>
 	<url>https://github.com/whelk-io/flesch-kincaid</url>
@@ -57,6 +59,13 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.10</version>
 			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
