@@ -1,11 +1,13 @@
 package io.whelk.flesch.kincaid;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.Token;
+import io.whelk.hy.phen.Hyphenator;
 import lombok.var;
 import lombok.experimental.UtilityClass;
 
@@ -139,7 +141,8 @@ public class ReadabilityCalculator {
   }
 
   static boolean isWord(Token token) { 
-    return token != null && POSTag.parse(token.posTag()) != POSTag.UNKNOWN;
+    var invalidWordTags = Arrays.asList(POSTag.UNKNOWN, POSTag.POS);
+    return token != null && !invalidWordTags.contains(POSTag.parse(token.posTag()));
   }
   
   static double countSyllables(List<Token> tokens) {
@@ -151,38 +154,10 @@ public class ReadabilityCalculator {
   }
   
   static double countSyllables(String word) {
-    if (word == null)
+    if (word == null || word.trim().isEmpty())
       return 0;
     
-    int numVowels = 0;
-    boolean lastWasVowel = false;
-    for (char wordChar : word.toCharArray()) {
-      boolean foundVowel = false;
-      for (char vowel : VOWELS) {
-        if (vowel == wordChar && lastWasVowel) {
-          foundVowel = true;
-          lastWasVowel = true;
-          break;
-        } else if (vowel == wordChar && !lastWasVowel) {
-          numVowels++;
-          foundVowel = true;
-          lastWasVowel = true;
-          break;
-        }
-      }
-      if (!foundVowel)
-        lastWasVowel = false;
-    }
-    
-    // remove silent es
-    if (word.length() > 2 && "es".equals(word.substring(word.length() - 2)))
-      numVowels--;
-    
-    // remove silent e
-    else if (word.length() > 1 && "e".equals(word.substring(word.length() - 1)))
-      numVowels--;
-
-    return numVowels;
+    return Hyphenator.hyphen(word).syllables().size();
   }
   
 }

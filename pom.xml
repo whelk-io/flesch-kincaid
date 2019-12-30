@@ -55,6 +55,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>io.whelk.hy.phen</groupId>
+			<artifactId>whelk-hy-phen-a-tion</artifactId>
+			<version>0.0.8-RELEASE</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.10</version>
@@ -73,9 +79,15 @@
 	<distributionManagement>
 		<repository>
 			<id>github</id>
-			<name>GitHub OWNER Apache Maven Packages</name>
 			<url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
 		</repository>
 	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>github-hy-phen-a-tion</id>
+			<url>https://maven.pkg.github.com/whelk-io/hy-phen-a-tion</url>
+		</repository>
+	</repositories>
 
 </project>
