@@ -21,6 +21,7 @@ import lombok.experimental.UtilityClass;
 public class ReadabilityCalculator {
   
   static final char[] VOWELS = {'a', 'e', 'i', 'o', 'u', 'y'};
+  static final List<POSTag> invalidWordTags = Arrays.asList(POSTag.UNKNOWN, POSTag.POS);
 
   /**
    * In the Flesch reading-ease test, higher scores indicate material that is easier to read; lower
@@ -141,7 +142,6 @@ public class ReadabilityCalculator {
   }
 
   static boolean isWord(Token token) { 
-    var invalidWordTags = Arrays.asList(POSTag.UNKNOWN, POSTag.POS);
     return token != null && !invalidWordTags.contains(POSTag.parse(token.posTag()));
   }
   
