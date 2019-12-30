@@ -20,8 +20,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ReadabilityCalculator {
   
-  static final char[] VOWELS = {'a', 'e', 'i', 'o', 'u', 'y'};
-  static final List<POSTag> invalidWordTags = Arrays.asList(POSTag.UNKNOWN, POSTag.POS);
+  private static final List<POSTag> invalidWordTags = Arrays.asList(POSTag.UNKNOWN, POSTag.POS);
 
   /**
    * In the Flesch reading-ease test, higher scores indicate material that is easier to read; lower
