@@ -48,7 +48,7 @@ public class ReadabilityCalculatorTest {
     String content = DEFAULT_SENTENCE;
     var result = ReadabilityCalculator.calculateReadingEase(content);
 
-    assertThat(result, is(113.10000000000002));
+    assertThat(result, is(103.70000000000002));
   }
 
   @Test
@@ -56,7 +56,7 @@ public class ReadabilityCalculatorTest {
     String content = CINDERLLA_EXCERPT;
     var result = ReadabilityCalculator.calculateReadingEase(content);
 
-    assertThat(result, is(93.55913669064749));
+    assertThat(result, is(80.13934306569344));
   }
 
   @Test
@@ -80,7 +80,7 @@ public class ReadabilityCalculatorTest {
     String content = DEFAULT_SENTENCE;
     var result = ReadabilityCalculator.calculateGradeLevel(content);
 
-    assertThat(result, is(-0.27999999999999936));
+    assertThat(result, is(1.0311111111111124));
   }
 
   @Test
@@ -88,7 +88,7 @@ public class ReadabilityCalculatorTest {
     String content = CINDERLLA_EXCERPT;
     var result = ReadabilityCalculator.calculateGradeLevel(content);
 
-    assertThat(result, is(5.142774922918807));
+    assertThat(result, is(6.943587069864442));
   }
 
   @Test
@@ -235,7 +235,7 @@ public class ReadabilityCalculatorTest {
     String word = "table";
     var result = ReadabilityCalculator.countSyllables(word);
 
-    assertThat(result, is(1.0));
+    assertThat(result, is(2.0));
   }
 
 }
