@@ -41,9 +41,7 @@ jobs:
       uses: whelk-io/maven-settings-xml-action@v2
       with:
         repositories: '[{ "id": "github-hy-phen-a-tion", "url": "https://maven.pkg.github.com/whelk-io/hy-phen-a-tion" }]'
-        servers: |
-          '[{"id": "github-hy-phen-a-tion", "username": "${{ secrets.BUILD_USERNAME }}", "password": "${{ secrets.BUILD_TOKEN }}"},
-          {"id": "github-flesch-kincaid", "username": "${{ secrets.BUILD_USERNAME }}", "password": "${{ secrets.BUILD_TOKEN }}"}]'
+        servers: '[{"id": "github-hy-phen-a-tion", "username": "${{ secrets.BUILD_USERNAME }}", "password": "${{ secrets.BUILD_TOKEN }}"}, {"id": "github-flesch-kincaid", "username": "${{ secrets.BUILD_USERNAME }}", "password": "${{ secrets.BUILD_TOKEN }}"}]'
 
     - name: Deploy package
       run: mvn -B deploy --file pom.xml
