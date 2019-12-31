@@ -7,7 +7,7 @@
 
 	<groupId>io.whelk.flesch.kincaid</groupId>
 	<artifactId>whelk-flesch-kincaid</artifactId>
-	<version>0.0.17-RELEASE</version>
+	<version>0.0.18-RELEASE</version>
 	<name>Flesch Kincaid</name>
 	<description>Java OSS library for performing Flesch-Kincaid readability tests.</description>
 	<url>https://github.com/whelk-io/flesch-kincaid</url>
@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>io.whelk.hy.phen</groupId>
 			<artifactId>whelk-hy-phen-a-tion</artifactId>
-			<version>0.0.8-RELEASE</version>
+			<version>0.0.9-RELEASE</version>
 		</dependency>
 
 		<dependency>
