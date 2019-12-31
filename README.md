@@ -80,12 +80,47 @@ source: https://en.wikipedia.org/wiki/Fleschâ€“Kincaid_readability_tests#Fleschâ
 
 ## Maven Integration
 
+
+**~/.m2/settings.xml**
+
+````xml
+<settings>
+
+  <activeProfiles>
+    <activeProfile>github</activeProfile>
+  </activeProfiles>
+
+  <profiles>
+    <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>github-flesch-kincaid</id>
+          <url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+  <servers>
+    <server>
+      <id>github-flesch-kincaid</id>
+      <username>GITHUB_USERNAME</username>
+      <password>PERSONAL_ACCESS_TOKEN</password>
+    </server>
+  </servers>
+
+</settings>
+````
+
+**pom.xml**
+
 ````xml
 <dependencies>
 	<dependency>
 		<groupId>io.whelk.flesch.kincaid</groupId>
 		<artifactId>whelk-flesch-kincaid</artifactId>
-		<version>0.0.6-release</version>
+		<version>0.0.17-release</version>
 	</dependency>
 
 </dependencies>
@@ -93,7 +128,7 @@ source: https://en.wikipedia.org/wiki/Fleschâ€“Kincaid_readability_tests#Fleschâ
 <repositories>
 	<repository>
 		<id>github</id>
-		<url>https://maven.pkg.github.com/whelk-io/flesh-kincaid</url>
+		<url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
 	</repository>
 </repositories>
 ````
