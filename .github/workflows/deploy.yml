@@ -38,8 +38,9 @@ jobs:
           -d '{ "tag_name": "'$version'", "target_commitish": "master", "name": "'$version'", "body": "Release deployment", "draft": false, "prerelease": false }'
 
     - name: Create Maven settings.xml
-      uses: s4u/maven-settings-action@v1
+      uses: whelk-io/maven-settings-xml-action@v2
       with:
+        repositories: '[{ "id": "github-hy-phen-a-tion", "url": "https://maven.pkg.github.com/whelk-io/hy-phen-a-tion" }]'
         servers: '[{"id": "github", "username": "${{ secrets.BUILD_USERNAME }}", "password": "${{ secrets.BUILD_TOKEN }}"}]'
 
     - name: Deploy package
