@@ -127,7 +127,7 @@ source: https://en.wikipedia.org/wiki/Fleschâ€“Kincaid_readability_tests#Fleschâ
 
 <repositories>
 	<repository>
-		<id>github</id>
+		<id>github-flesch-kincaid</id>
 		<url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
 	</repository>
 </repositories>
