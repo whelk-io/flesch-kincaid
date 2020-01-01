@@ -14,7 +14,7 @@ import lombok.experimental.UtilityClass;
 /**
  * 
  * @author Zack Teater
- * @version 0.0.18
+ * @version 0.0.19
  *
  */
 @UtilityClass
