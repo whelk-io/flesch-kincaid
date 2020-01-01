@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
+import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.Token;
 import lombok.var;
@@ -58,6 +59,14 @@ public class ReadabilityCalculatorTest {
 
     assertThat(result, is(80.13934306569344));
   }
+  
+  @Test
+  public void testCalculateReadingEase_withSentences() { 
+    var sentences = new Document(CINDERLLA_EXCERPT).sentences();
+    var result = ReadabilityCalculator.calculateReadingEase(sentences);
+    
+    assertThat(result, is(80.13934306569344));
+  }
 
   @Test
   public void testCalculateGradeLevel_withNullContent() {
@@ -88,6 +97,14 @@ public class ReadabilityCalculatorTest {
     String content = CINDERLLA_EXCERPT;
     var result = ReadabilityCalculator.calculateGradeLevel(content);
 
+    assertThat(result, is(6.943587069864442));
+  }
+  
+  @Test
+  public void testCalculateGradeLevel_withSentences() { 
+    var sentences = new Document(CINDERLLA_EXCERPT).sentences();
+    var result = ReadabilityCalculator.calculateGradeLevel(sentences);
+    
     assertThat(result, is(6.943587069864442));
   }
 

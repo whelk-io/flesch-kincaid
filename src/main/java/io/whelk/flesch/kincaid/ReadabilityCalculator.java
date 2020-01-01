@@ -14,7 +14,7 @@ import lombok.experimental.UtilityClass;
 /**
  * 
  * @author Zack Teater
- * @version 0.0.1
+ * @version 0.0.19
  *
  */
 @UtilityClass
@@ -22,6 +22,17 @@ public class ReadabilityCalculator {
   
   private static final List<POSTag> invalidWordTags = Arrays.asList(POSTag.UNKNOWN, POSTag.POS);
 
+  /**
+   * {@code content} parsed to {@code List<Sentence>} and overloaded to
+   * {@link #calculateReadingEase(List) calculateReadingEase(List&lt;Sentence&gt;)}
+   * 
+   * @param content to lex
+   * @return
+   */
+  public static double calculateReadingEase(String content) {
+    return calculateReadingEase(tokenize(content));
+  }
+  
   /**
    * In the Flesch reading-ease test, higher scores indicate material that is easier to read; lower
    * numbers mark passages that are more difficult to read. The formula for the Flesch reading-ease
@@ -70,11 +81,10 @@ public class ReadabilityCalculator {
    *    </tr>
    * </table>
    * 
-   * @param content as sentence or paragraph to lex
-   * @return reading-ease score
+   * @param sentences to lex
+   * @return
    */
-  public static double calculateReadingEase(String content) {
-    var sentences = tokenize(content);
+  public static double calculateReadingEase(List<Sentence> sentences) {
     var words = tokenize(sentences);
     
     double totalSentences = sentences.size();
@@ -82,6 +92,17 @@ public class ReadabilityCalculator {
     double totalSyllables = countSyllables(words);
     
     return 206.835 - 1.015 * (totalWords / totalSentences) - 84.6 * (totalSyllables / totalWords);
+  }
+  
+  /**
+   * {@code content} parsed to {@code List<Sentence>} and overloaded to
+   * {@link #calculateGradeLevel(List) calculateGradeLevel(List&lt;Sentence&gt;)}
+   * 
+   * @param content to lex
+   * @return
+   */
+  public static double calculateGradeLevel(String content) {
+    return calculateGradeLevel(tokenize(content));
   }
   
   /**
@@ -111,11 +132,10 @@ public class ReadabilityCalculator {
    * of the 50 used words are monosyllabic; "anywhere", which occurs eight times, is the only
    * exception.)
    * 
-   * @param content as sentence or paragraph to lex
+   * @param sentences to lex
    * @return reading grade level
    */
-  public static double calculateGradeLevel(String content) {
-    var sentences = tokenize(content);
+  public static double calculateGradeLevel(List<Sentence> sentences) {
     var words = tokenize(sentences);
     
     double totalSentences = sentences.size();
