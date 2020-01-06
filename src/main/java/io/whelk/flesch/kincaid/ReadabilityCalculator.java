@@ -1,12 +1,7 @@
 package io.whelk.flesch.kincaid;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
-import edu.stanford.nlp.simple.Token;
 import io.whelk.hy.phen.Hyphenator;
 import lombok.var;
 import lombok.experimental.UtilityClass;
@@ -14,23 +9,24 @@ import lombok.experimental.UtilityClass;
 /**
  * 
  * @author Zack Teater
- * @version 0.0.19
+ * @version 0.0.20
  *
  */
 @UtilityClass
 public class ReadabilityCalculator {
   
-  private static final List<POSTag> invalidWordTags = Arrays.asList(POSTag.UNKNOWN, POSTag.POS);
-
   /**
    * {@code content} parsed to {@code List<Sentence>} and overloaded to
-   * {@link #calculateReadingEase(List) calculateReadingEase(List&lt;Sentence&gt;)}
+   * {@link #calculateReadingEase(List) calculateReadingEase(List&lt;Sentence&gt;, List&lt;String&gt;)}
    * 
    * @param content to lex
    * @return
    */
   public static double calculateReadingEase(String content) {
-    return calculateReadingEase(tokenize(content));
+    var sentences = Tokenizer.tokenizeContent(content);
+    var words = Tokenizer.tokenizeSentences(sentences);
+    
+    return ReadabilityCalculator.calculateReadingEase(sentences, words);
   }
   
   /**
@@ -84,9 +80,7 @@ public class ReadabilityCalculator {
    * @param sentences to lex
    * @return
    */
-  public static double calculateReadingEase(List<Sentence> sentences) {
-    var words = tokenize(sentences);
-    
+  public static double calculateReadingEase(List<Sentence> sentences, List<String> words) {
     double totalSentences = sentences.size();
     double totalWords = words.size();
     double totalSyllables = countSyllables(words);
@@ -96,13 +90,16 @@ public class ReadabilityCalculator {
   
   /**
    * {@code content} parsed to {@code List<Sentence>} and overloaded to
-   * {@link #calculateGradeLevel(List) calculateGradeLevel(List&lt;Sentence&gt;)}
+   * {@link #calculateGradeLevel(List) calculateGradeLevel(List&lt;Sentence&gt;, List&lt;String&gt;)}
    * 
    * @param content to lex
    * @return
    */
   public static double calculateGradeLevel(String content) {
-    return calculateGradeLevel(tokenize(content));
+    var sentences = Tokenizer.tokenizeContent(content);
+    var words = Tokenizer.tokenizeSentences(sentences);
+    
+    return ReadabilityCalculator.calculateGradeLevel(sentences, words);
   }
   
   /**
@@ -133,11 +130,10 @@ public class ReadabilityCalculator {
    * exception.)
    * 
    * @param sentences to lex
+   * @param words parsed from sentences
    * @return reading grade level
    */
-  public static double calculateGradeLevel(List<Sentence> sentences) {
-    var words = tokenize(sentences);
-    
+  public static double calculateGradeLevel(List<Sentence> sentences, List<String> words) {
     double totalSentences = sentences.size();
     double totalWords = words.size();
     double totalSyllables = countSyllables(words);
@@ -145,36 +141,21 @@ public class ReadabilityCalculator {
     return 0.39 * (totalWords / totalSentences) + 11.8 * (totalSyllables / totalWords) - 15.59;
   }
   
-  static List<Sentence> tokenize(String content) {
-    return content != null ? new Document(content).sentences() : Collections.emptyList();
-  }
-  
-  static List<Token> tokenize(List<Sentence> sentences) { 
-    return sentences != null ? 
-           sentences
-              .stream()
-              .map(Sentence::tokens)
-              .flatMap(List<Token>::stream)
-              .filter(ReadabilityCalculator::isWord)
-              .collect(Collectors.toList()) : 
-           Collections.emptyList();
-  }
-
-  static boolean isWord(Token token) { 
-    return token != null && !invalidWordTags.contains(POSTag.parse(token.posTag()));
-  }
-  
-  static double countSyllables(List<Token> tokens) {
+  static double countSyllables(List<String> tokens) {
     return tokens
             .stream()
-            .map(Token::originalText)
             .mapToDouble(ReadabilityCalculator::countSyllables)
             .sum();
   }
   
   static double countSyllables(String word) {
+    // null or empty strings have no syllables
     if (word == null || word.trim().isEmpty())
       return 0;
+    
+    // words with special characters are likely abbreviated NNP or NNPS, count as 1
+    if (!word.matches("[a-zA-Z]+"))
+      return 1;
     
     return Hyphenator.hyphen(word).syllables().size();
   }
