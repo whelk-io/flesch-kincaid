@@ -120,7 +120,7 @@ source: https://en.wikipedia.org/wiki/Fleschâ€“Kincaid_readability_tests#Fleschâ
 	<dependency>
 		<groupId>io.whelk.flesch.kincaid</groupId>
 		<artifactId>whelk-flesch-kincaid</artifactId>
-		<version>0.0.17-release</version>
+		<version>${whelk-flesch-version}</version>
 	</dependency>
 
 </dependencies>
@@ -145,13 +145,13 @@ Stanford Core NLP offers a range of NLP features, however the trained models mus
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.9.2</version>
+			<version>${standford-corenlp-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.9.2</version>
+			<version>${standford-corenlp-version}</version>
 			<classifier>models</classifier>
 		</dependency>
 
@@ -165,13 +165,13 @@ Stanford NLP models are nearly 370mb in size. As of today, AWS Lambda functions 
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>3.9.2</version>
+			<version>${standford-corenlp-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-comprehend</artifactId>
-			<version>1.11.700</version>
+			<version>${aws-sdk-version}</version>
 		</dependency>
 
 ````
