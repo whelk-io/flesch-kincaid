@@ -57,8 +57,4 @@ jobs:
         git config --local user.name ${{ secrets.BUILD_USERNAME }}
         git pull
         git merge origin/master
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        branch: develop
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        git push
