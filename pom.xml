@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-comprehend</artifactId>
-			<version>1.11.723</version>
+			<version>1.11.749</version>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
@@ -69,7 +69,7 @@
 		<dependency>
 			<groupId>io.whelk.hy.phen</groupId>
 			<artifactId>whelk-hy-phen-a-tion</artifactId>
-			<version>0.0.15-RELEASE</version>
+			<version>0.0.16-RELEASE</version>
 		</dependency>
 
 		<dependency>
