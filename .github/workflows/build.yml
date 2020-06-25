@@ -19,7 +19,7 @@ jobs:
         java-version: 1.8
 
     - name: Create Maven settings.xml
-      uses: whelk-io/maven-settings-xml-action@v7
+      uses: whelk-io/maven-settings-xml-action@v8.1
       with:
         repositories: '[{ "id": "github-hy-phen-a-tion", "url": "https://maven.pkg.github.com/whelk-io/hy-phen-a-tion" }]'
         servers: '[{"id": "github-hy-phen-a-tion", "username": "${{ secrets.BUILD_USERNAME }}", "password": "${{ secrets.BUILD_TOKEN }}"}]'
