@@ -7,7 +7,7 @@
 
 	<groupId>io.whelk.flesch.kincaid</groupId>
 	<artifactId>whelk-flesch-kincaid</artifactId>
-	<version>0.0.25-RELEASE</version>
+	<version>0.0.26-RELEASE</version>
 	<name>Flesch Kincaid</name>
 	<description>Java OSS library for performing Flesch-Kincaid readability tests.</description>
 	<url>https://github.com/whelk-io/flesch-kincaid</url>
@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-comprehend</artifactId>
-			<version>1.11.797</version>
+			<version>1.11.807</version>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
