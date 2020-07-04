@@ -1,7 +1,7 @@
 # Flesch-Kincaid
 Java OSS library for performing Flesch-Kincaid readability tests.
 
-[![CodeFactor](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid/badge)](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid) ![](https://github.com/whelk-io/flesch-kincaid/workflows/deploy/badge.svg) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=whelk-io/flesch-kincaid)](https://dependabot.com)
+[![CodeFactor](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid/badge)](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid) ![](https://github.com/whelk-io/flesch-kincaid/workflows/deploy/badge.svg)
 
 ## Calculate Reading Ease
 In the Flesch reading-ease test, higher scores indicate material that is easier to read; lower numbers mark passages that are more difficult to read. The formula for the Flesch reading-ease score (FRES) test is
