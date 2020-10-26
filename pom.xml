@@ -7,7 +7,7 @@
 
 	<groupId>io.whelk.flesch.kincaid</groupId>
 	<artifactId>whelk-flesch-kincaid</artifactId>
-	<version>0.0.30-RELEASE</version>
+	<version>0.0.31-RELEASE</version>
 	<name>Flesch Kincaid</name>
 	<description>Java OSS library for performing Flesch-Kincaid readability tests.</description>
 	<url>https://github.com/whelk-io/flesch-kincaid</url>
@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-comprehend</artifactId>
-			<version>1.11.816</version>
+			<version>1.11.882</version>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
@@ -75,14 +75,14 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.12</version>
+			<version>1.18.16</version>
 			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13</version>
+			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
 
