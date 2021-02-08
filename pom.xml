@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-comprehend</artifactId>
-			<version>1.11.946</version>
+			<version>1.11.950</version>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
