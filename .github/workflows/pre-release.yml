@@ -1,0 +1,27 @@
+name: pre-release
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2.3.4
+        with:
+          ref: develop
+
+      - name: Set up Java
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: 11
+
+      - name: Build
+        run: ./mvnw -B clean package -DskipTests
+
+      - name: Run Unit Tests
+        run: ./mvnw -B test

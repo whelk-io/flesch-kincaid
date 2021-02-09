@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.Token;
-import lombok.var;
 
 public class PennTreebankValidatorTest {
 
