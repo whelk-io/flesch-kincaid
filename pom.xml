@@ -69,7 +69,7 @@
 		<dependency>
 			<groupId>io.whelk.hy.phen</groupId>
 			<artifactId>whelk-hy-phen-a-tion</artifactId>
-			<version>0.0.18-RELEASE</version>
+			<version>0.1.4</version>
 		</dependency>
 
 		<dependency>
