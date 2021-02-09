@@ -10,7 +10,6 @@ import com.amazonaws.services.comprehend.model.PartOfSpeechTag;
 import com.amazonaws.services.comprehend.model.PartOfSpeechTagType;
 import com.amazonaws.services.comprehend.model.SyntaxToken;
 import edu.stanford.nlp.simple.Sentence;
-import lombok.var;
 
 public class TokenizerTest {
 
