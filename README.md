@@ -1,7 +1,7 @@
 # Flesch-Kincaid
 Java OSS library for performing Flesch-Kincaid readability tests.
 
-[![CodeFactor](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid/badge)](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid) ![](https://github.com/whelk-io/flesch-kincaid/workflows/deploy/badge.svg)
+[![CodeFactor](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid/badge)](https://www.codefactor.io/repository/github/whelk-io/flesch-kincaid) ![release](https://github.com/whelk-io/flesch-kincaid/workflows/release/badge.svg)
 
 ## Calculate Reading Ease
 In the Flesch reading-ease test, higher scores indicate material that is easier to read; lower numbers mark passages that are more difficult to read. The formula for the Flesch reading-ease score (FRES) test is
@@ -20,7 +20,7 @@ Scores can be interpreted as shown in the table below.
 | 50.0–30.0 | College | Difficult to read.
 | 30.0–0.0 | College graduate | Very difficult to read. Best understood by university graduates.
 
-source: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch_reading_ease
+See [Flesch reading ease](https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch_reading_ease) for more information.
 
 **Example Usage**
 
@@ -54,7 +54,7 @@ The result is a number that corresponds with a U.S. grade level. The sentence, "
 
 The lowest grade level score in theory is −3.40, but there are few real passages in which every sentence consists of a single one-syllable word. Green Eggs and Ham by Dr. Seuss comes close, averaging 5.7 words per sentence and 1.02 syllables per word, with a grade level of −1.3. (Most of the 50 used words are monosyllabic; "anywhere", which occurs eight times, is the only exception.)
 
-source: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch–Kincaid_grade_level
+See [Flesch–Kincaid grade level](https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch–Kincaid_grade_level) for more information. 
 
 **Example Usage**
 ````java
@@ -78,103 +78,56 @@ source: https://en.wikipedia.org/wiki/Flesch–Kincaid_readability_tests#Flesch�
   }
 ````
 
+## System Requirements
+
+* Java 11
+
 ## Maven Integration
 
-
-**~/.m2/settings.xml**
-
 ````xml
-<settings>
-
-  <activeProfiles>
-    <activeProfile>github</activeProfile>
-  </activeProfiles>
-
-  <profiles>
-    <profile>
-      <id>github</id>
-      <repositories>
-        <repository>
-          <id>github-flesch-kincaid</id>
-          <url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
-
-  <servers>
-    <server>
-      <id>github-flesch-kincaid</id>
-      <username>GITHUB_USERNAME</username>
-      <password>PERSONAL_ACCESS_TOKEN</password>
-    </server>
-  </servers>
-
-</settings>
+<dependency>
+  <groupId>io.whelk.flesch.kincaid</groupId>
+	<artifactId>whelk-flesch-kincaid</artifactId>
+</dependency>
 ````
 
-**pom.xml**
-
-````xml
-<dependencies>
-	<dependency>
-		<groupId>io.whelk.flesch.kincaid</groupId>
-		<artifactId>whelk-flesch-kincaid</artifactId>
-		<version>${whelk-flesch-version}</version>
-	</dependency>
-
-</dependencies>
-
-<repositories>
-	<repository>
-		<id>github-flesch-kincaid</id>
-		<url>https://maven.pkg.github.com/whelk-io/flesch-kincaid</url>
-	</repository>
-</repositories>
-````
-
-### Provided Dependencies
+## Provided Dependencies
 
 `whelk-flesch-kincaid` offers two options for parsing String content to requisite sentences and word tokens.
 
-#### Stanford Core NLP
+### Stanford Core NLP
 
 Stanford Core NLP offers a range of NLP features, however the trained models must be loaded as a separate dependency. The models are used to parse POS tags from sentences.
 
 ````xml
-		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>stanford-corenlp</artifactId>
-			<version>${standford-corenlp-version}</version>
-		</dependency>
+<dependency>
+  <groupId>edu.stanford.nlp</groupId>
+  <artifactId>stanford-corenlp</artifactId>
+  <version>${standford-corenlp-version}</version>
+</dependency>
 
-		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>stanford-corenlp</artifactId>
-			<version>${standford-corenlp-version}</version>
-			<classifier>models</classifier>
-		</dependency>
-
+<dependency>
+  <groupId>edu.stanford.nlp</groupId>
+  <artifactId>stanford-corenlp</artifactId>
+  <version>${standford-corenlp-version}</version>
+  <classifier>models</classifier>
+</dependency>
 ````
 
-#### AWS Comprehend and Stanford Core NLP hybrid
+### AWS Comprehend and Stanford Core NLP hybrid
 
-Stanford NLP models are nearly 370mb in size. As of today, AWS Lambda functions and layers have a upper limit of 250mb. Since the models are only used to parse POS tags from words, AWS comprehend can be used instead to parse `SyntaxTokens` using `BatchDetectSyntax` or `DetectSyntax`. See AWS documentation for more information: https://github.com/awsdocs/amazon-comprehend-developer-guide
+Stanford NLP models are nearly 370mb in size. As of today, AWS Lambda functions and layers have a upper limit of 250mb. Since the models are only used to parse POS tags from words, AWS comprehend can be used instead to parse `SyntaxTokens` using `BatchDetectSyntax` or `DetectSyntax`. See [AWS documentation](https://github.com/awsdocs/amazon-comprehend-developer-guide)  for more information.
 
 ````xml
-		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>stanford-corenlp</artifactId>
-			<version>${standford-corenlp-version}</version>
-		</dependency>
+<dependency>
+  <groupId>edu.stanford.nlp</groupId>
+  <artifactId>stanford-corenlp</artifactId>
+  <version>${standford-corenlp-version}</version>
+</dependency>
 
-		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk-comprehend</artifactId>
-			<version>${aws-sdk-version}</version>
-		</dependency>
-
+<dependency>
+  <groupId>com.amazonaws</groupId>
+  <artifactId>aws-java-sdk-comprehend</artifactId>
+  <version>${aws-sdk-version}</version>
+</dependency>
 ````
-
-More information on authenticating with GitHub packages: https://help.github.com/en/github/managing-packages-with-github-packages/configuring-apache-maven-for-use-with-github-packages#authenticating-to-github-packages
-
