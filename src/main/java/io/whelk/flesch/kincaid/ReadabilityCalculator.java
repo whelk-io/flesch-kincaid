@@ -3,7 +3,6 @@ package io.whelk.flesch.kincaid;
 import java.util.List;
 import edu.stanford.nlp.simple.Sentence;
 import io.whelk.hy.phen.Hyphenator;
-import lombok.var;
 import lombok.experimental.UtilityClass;
 
 /**
