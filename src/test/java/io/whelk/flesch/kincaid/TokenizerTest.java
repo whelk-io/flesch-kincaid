@@ -1,20 +1,26 @@
 package io.whelk.flesch.kincaid;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Test;
+
 import com.amazonaws.services.comprehend.model.PartOfSpeechTag;
 import com.amazonaws.services.comprehend.model.PartOfSpeechTagType;
 import com.amazonaws.services.comprehend.model.SyntaxToken;
+
+import org.junit.jupiter.api.Test;
+
 import edu.stanford.nlp.simple.Sentence;
 
-public class TokenizerTest {
+class TokenizerTest {
 
   @Test
-  public void testTokenizeContent_withNullContent() {
+  void testTokenizeContent_withNullContent() {
     String content = null;
     var result = Tokenizer.tokenizeContent(content);
 
@@ -23,7 +29,7 @@ public class TokenizerTest {
   }
 
   @Test
-  public void testTokenizeContent_withNillContent() {
+  void testTokenizeContent_withNillContent() {
     var content = "";
     var result = Tokenizer.tokenizeContent(content);
 
@@ -32,18 +38,18 @@ public class TokenizerTest {
   }
 
   @Test
-  public void testTokenizeContent_withContent() {
+  void testTokenizeContent_withContent() {
     var content = ReadabilityCalculatorTest.DEFAULT_SENTENCE;
     var result = Tokenizer.tokenizeContent(content);
 
     assertNotNull(result);
     assertFalse(result.isEmpty());
-    assertThat(result.size(), is(1));
-    assertThat(result.get(0).text(), is(ReadabilityCalculatorTest.DEFAULT_SENTENCE));
+    assertEquals(1, result.size());
+    assertTrue(ReadabilityCalculatorTest.DEFAULT_SENTENCE.equals(result.get(0).text()));
   }
 
   @Test
-  public void testTokenizeSentences_withNullList() {
+  void testTokenizeSentences_withNullList() {
     List<Sentence> sentences = null;
     var result = Tokenizer.tokenizeSentences(sentences);
 
@@ -52,7 +58,7 @@ public class TokenizerTest {
   }
 
   @Test
-  public void testTokenizeSentences_withNillList() {
+  void testTokenizeSentences_withNillList() {
     List<Sentence> sentences = Collections.emptyList();
     var result = Tokenizer.tokenizeSentences(sentences);
 
@@ -61,74 +67,73 @@ public class TokenizerTest {
   }
 
   @Test
-  public void testTokenizeSentences_withList() {
+  void testTokenizeSentences_withList() {
     var sentence = new Sentence(ReadabilityCalculatorTest.DEFAULT_SENTENCE);
     var sentences = Arrays.asList(sentence);
 
     var result = Tokenizer.tokenizeSentences(sentences);
     assertNotNull(result);
     assertFalse(result.isEmpty());
-    assertThat(result.size(), is(9));
-    assertThat(result.get(0), is("The"));
-    assertThat(result.get(1), is("quick"));
-    assertThat(result.get(2), is("brown"));
-    assertThat(result.get(3), is("fox"));
-    assertThat(result.get(4), is("jumps"));
-    assertThat(result.get(5), is("over"));
-    assertThat(result.get(6), is("the"));
-    assertThat(result.get(7), is("lazy"));
-    assertThat(result.get(8), is("dog"));
+    assertEquals(9, result.size());
+    assertTrue("The".equals(result.get(0)));
+    assertTrue("quick".equals(result.get(1)));
+    assertTrue("brown".equals(result.get(2)));
+    assertTrue("fox".equals(result.get(3)));
+    assertTrue("jumps".equals(result.get(4)));
+    assertTrue("over".equals(result.get(5)));
+    assertTrue("the".equals(result.get(6)));
+    assertTrue("lazy".equals(result.get(7)));
+    assertTrue("dog".equals(result.get(8)));
   }
 
   @Test
-  public void testTokenizeSyntaxTokens_withNullTokens() {
+  void testTokenizeSyntaxTokens_withNullTokens() {
     List<SyntaxToken> syntaxTokens = null;
 
     var result = Tokenizer.tokenizeSyntaxTokens(syntaxTokens);
     assertNotNull(result);
     assertTrue(result.isEmpty());
   }
-  
+
   @Test
-  public void testTokenizeSyntaxTokens_withNillTokens() { 
+  void testTokenizeSyntaxTokens_withNillTokens() {
     List<SyntaxToken> syntaxTokens = Collections.emptyList();
 
     var result = Tokenizer.tokenizeSyntaxTokens(syntaxTokens);
     assertNotNull(result);
     assertTrue(result.isEmpty());
   }
-  
+
   @Test
-  public void testTokenizeSyntaxTokens_withList() {
-    var syntaxTokens = 
-        Arrays.asList(
-            this.withTag("The", PartOfSpeechTagType.DET),
-            this.withTag("quick", PartOfSpeechTagType.ADJ),
-            this.withTag("brown", PartOfSpeechTagType.ADJ),
-            this.withTag("fox", PartOfSpeechTagType.NOUN),
-            this.withTag("jumps", PartOfSpeechTagType.VERB),
-            this.withTag("over", PartOfSpeechTagType.ADP),
-            this.withTag("the", PartOfSpeechTagType.DET),
-            this.withTag("lazy", PartOfSpeechTagType.ADJ),
-            this.withTag("dog", PartOfSpeechTagType.NOUN),
-            this.withTag(".", PartOfSpeechTagType.PUNCT));
-    
+  void testTokenizeSyntaxTokens_withList() {
+    var syntaxTokens = List.of( //
+        this.withTag("The", PartOfSpeechTagType.DET), //
+        this.withTag("quick", PartOfSpeechTagType.ADJ), //
+        this.withTag("brown", PartOfSpeechTagType.ADJ), //
+        this.withTag("fox", PartOfSpeechTagType.NOUN), //
+        this.withTag("jumps", PartOfSpeechTagType.VERB), //
+        this.withTag("over", PartOfSpeechTagType.ADP), //
+        this.withTag("the", PartOfSpeechTagType.DET), //
+        this.withTag("lazy", PartOfSpeechTagType.ADJ), //
+        this.withTag("dog", PartOfSpeechTagType.NOUN), //
+        this.withTag(".", PartOfSpeechTagType.PUNCT));
+
     var result = Tokenizer.tokenizeSyntaxTokens(syntaxTokens);
     assertNotNull(result);
     assertFalse(result.isEmpty());
-    assertThat(result.size(), is(9));
-    assertThat(result.get(0), is("The"));
-    assertThat(result.get(1), is("quick"));
-    assertThat(result.get(2), is("brown"));
-    assertThat(result.get(3), is("fox"));
-    assertThat(result.get(4), is("jumps"));
-    assertThat(result.get(5), is("over"));
-    assertThat(result.get(6), is("the"));
-    assertThat(result.get(7), is("lazy"));
-    assertThat(result.get(8), is("dog"));
+    assertEquals(9, result.size());
+    assertTrue("The".equals(result.get(0)));
+    assertTrue("quick".equals(result.get(1)));
+    assertTrue("brown".equals(result.get(2)));
+    assertTrue("fox".equals(result.get(3)));
+    assertTrue("jumps".equals(result.get(4)));
+    assertTrue("over".equals(result.get(5)));
+    assertTrue("the".equals(result.get(6)));
+    assertTrue("lazy".equals(result.get(7)));
+    assertTrue("dog".equals(result.get(8)));
   }
-  
-  private SyntaxToken withTag(String text, PartOfSpeechTagType tag) { 
+
+  SyntaxToken withTag(String text, PartOfSpeechTagType tag) {
     var pos = new PartOfSpeechTag();
     pos.setTag(tag.name());
     var token = new SyntaxToken();
