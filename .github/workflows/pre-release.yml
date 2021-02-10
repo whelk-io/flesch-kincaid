@@ -16,7 +16,7 @@ jobs:
         with:
           ref: develop
 
-      - name: Set up Java
+      - name: Setup Java
         uses: actions/setup-java@v1.4.3
         with:
           java-version: 11
