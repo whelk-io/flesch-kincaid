@@ -87,7 +87,7 @@ See [Flesch–Kincaid grade level](https://en.wikipedia.org/wiki/Flesch–Kincai
 ````xml
 <dependency>
   <groupId>io.whelk.flesch.kincaid</groupId>
-	<artifactId>whelk-flesch-kincaid</artifactId>
+  <artifactId>whelk-flesch-kincaid</artifactId>
 </dependency>
 ````
 
