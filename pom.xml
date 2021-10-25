@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>4.2.2</version>
+			<version>4.3.1</version>
 			<classifier>models</classifier>
 			<scope>provided</scope>
 			<optional>true</optional>
