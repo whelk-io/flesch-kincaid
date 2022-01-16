@@ -43,47 +43,53 @@
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>4.2.0</version>
-			<scope>provided</scope>
-			<optional>true</optional>
+			<version>4.3.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-corenlp</artifactId>
-			<version>4.2.0</version>
+			<version>4.3.2</version>
 			<classifier>models</classifier>
-			<scope>provided</scope>
-			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk-comprehend</artifactId>
-			<version>1.11.951</version>
-			<scope>provided</scope>
-			<optional>true</optional>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>3.11.4</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.whelk.hy.phen</groupId>
 			<artifactId>whelk-hy-phen-a-tion</artifactId>
-			<version>0.1.10</version>
+			<version>0.1.14</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.18</version>
+			<version>1.18.22</version>
 			<optional>true</optional>
 		</dependency>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.1</version>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.8.2</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -127,7 +133,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.3.1</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -140,7 +146,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.6</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
@@ -156,6 +162,60 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<transformers>
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<mainClass>com.example.demo.Example</mainClass>
+						</transformer>
+					</transformers>
+					<artifactSet>
+						<excludes>
+							<exclude>org.projectlombok:lombok</exclude>
+						</excludes>
+					</artifactSet>
+					<filters>
+						<filter>
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>edu/stanford/nlp/models/coref/*</exclude>
+								<exclude>edu/stanford/nlp/models/coref/fastneural/*</exclude>
+								<exclude>edu/stanford/nlp/models/coref/neural/*</exclude>
+								<exclude>edu/stanford/nlp/models/coref/statistical/*</exclude>
+								<exclude>edu/stanford/nlp/models/ner/*</exclude>
+								<exclude>edu/stanford/nlp/models/dcoref/*</exclude>
+								<exclude>edu/stanford/nlp/models/gender/*</exclude>
+								<exclude>edu/stanford/nlp/models/kbp/english/*</exclude>
+								<exclude>edu/stanford/nlp/models/kbp/english/gazetteers/*</exclude>
+								<exclude>edu/stanford/nlp/models/kbp/english/semgrex/*</exclude>
+								<exclude>edu/stanford/nlp/models/kbp/english/tokensregex/*</exclude>
+								<exclude>edu/stanford/nlp/models/lexparser/*</exclude>
+								<exclude>edu/stanford/nlp/models/naturalli/*</exclude>
+								<exclude>edu/stanford/nlp/models/naturalli/affinities/*</exclude>
+								<exclude>edu/stanford/nlp/models/parser/nndep/*</exclude>
+								<exclude>edu/stanford/nlp/models/quoteattribution/*</exclude>
+								<exclude>edu/stanford/nlp/models/sentiment/*</exclude>
+								<exclude>edu/stanford/nlp/models/supervised_relation_extractor/*</exclude>
+								<exclude>edu/stanford/nlp/models/sutime/*</exclude>
+								<exclude>edu/stanford/nlp/models/truecase/*</exclude>
+								<exclude>edu/stanford/nlp/models/ud/*</exclude>
+								<exclude>edu/stanford/nlp/models/upos/*</exclude>
+							</excludes>
+						</filter>
+					</filters>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

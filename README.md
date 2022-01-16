@@ -88,46 +88,6 @@ See [Flesch–Kincaid grade level](https://en.wikipedia.org/wiki/Flesch–Kincai
 <dependency>
   <groupId>io.whelk.flesch.kincaid</groupId>
   <artifactId>whelk-flesch-kincaid</artifactId>
-</dependency>
-````
-
-## Provided Dependencies
-
-`whelk-flesch-kincaid` offers two options for parsing String content to requisite sentences and word tokens.
-
-### Stanford Core NLP
-
-Stanford Core NLP offers a range of NLP features, however the trained models must be loaded as a separate dependency. The models are used to parse POS tags from sentences.
-
-````xml
-<dependency>
-  <groupId>edu.stanford.nlp</groupId>
-  <artifactId>stanford-corenlp</artifactId>
-  <version>${standford-corenlp-version}</version>
-</dependency>
-
-<dependency>
-  <groupId>edu.stanford.nlp</groupId>
-  <artifactId>stanford-corenlp</artifactId>
-  <version>${standford-corenlp-version}</version>
-  <classifier>models</classifier>
-</dependency>
-````
-
-### AWS Comprehend and Stanford Core NLP hybrid
-
-Stanford NLP models are nearly 370mb in size. As of today, AWS Lambda functions and layers have a upper limit of 250mb. Since the models are only used to parse POS tags from words, AWS comprehend can be used instead to parse `SyntaxTokens` using `BatchDetectSyntax` or `DetectSyntax`. See [AWS documentation](https://github.com/awsdocs/amazon-comprehend-developer-guide)  for more information.
-
-````xml
-<dependency>
-  <groupId>edu.stanford.nlp</groupId>
-  <artifactId>stanford-corenlp</artifactId>
-  <version>${standford-corenlp-version}</version>
-</dependency>
-
-<dependency>
-  <groupId>com.amazonaws</groupId>
-  <artifactId>aws-java-sdk-comprehend</artifactId>
-  <version>${aws-sdk-version}</version>
+  <version>${whelk-flesch-kincaid.version}</version>
 </dependency>
 ````
