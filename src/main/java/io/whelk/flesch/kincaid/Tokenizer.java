@@ -18,7 +18,6 @@ package io.whelk.flesch.kincaid;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.amazonaws.services.comprehend.model.SyntaxToken;
 import edu.stanford.nlp.simple.Document;
 import edu.stanford.nlp.simple.Sentence;
 import edu.stanford.nlp.simple.Token;
@@ -58,19 +57,4 @@ public class Tokenizer {
         : Collections.emptyList();
   }
 
-  /**
-   * Convert syntaxTokens to tokens and filter out non-word tokens.
-   * 
-   * @param syntaxTokens to filter and convert
-   * @return tokens validated and converted to text
-   */
-  public static List<String> tokenizeSyntaxTokens(List<SyntaxToken> syntaxTokens) {
-    return syntaxTokens != null ? //
-        syntaxTokens //
-            .stream() //
-            .filter(ComprehendValidator::isWord) //
-            .map(SyntaxToken::getText) //
-            .collect(Collectors.toList()) //
-        : Collections.emptyList();
-  }
 }
